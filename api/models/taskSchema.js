@@ -11,9 +11,13 @@ const taskSchema = mongoose.Schema({
   },
   type: {
     type: String,
-    require: true,
+    default: "none",
   },
-  time: {
+  timeCreated: {
+    type: Date,
+    default: Date.now,
+  },
+  timeUpdated: {
     type: Date,
     default: Date.now,
   },
