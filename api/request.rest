@@ -1,0 +1,16 @@
+GET http://localhost:3001/tasks
+
+###
+POST http://localhost:3001/tasks/new
+Content-Type: application/json
+
+{
+    "title" : "New Task2",
+    "type" : "business"
+}
+
+###
+DELETE http://localhost:3001/tasks/delete/634acb198557034a674fda51
+
+###
+PATCH http://localhost:3001/tasks/update/634acb574e7ae3a4d84faa76
