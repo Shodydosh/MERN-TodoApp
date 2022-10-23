@@ -51,7 +51,7 @@ app.delete("/tasks/delete/:id", async (req, res) => {
   }
 });
 
-app.put("/tasks/update/:id", async (req, res) => {
+app.patch("/tasks/update/:id", async (req, res) => {
   try {
     await Task.findById(req.params.id, (err, task) => {
       task.status = !task.status;
