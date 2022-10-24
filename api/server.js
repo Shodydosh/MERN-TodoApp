@@ -35,7 +35,6 @@ app.post("/tasks/new", async (req, res) => {
     const task = new Task(req.body);
     await task.save();
     res.status(200).send("Task created");
-    // console.log("task created");
   } catch (err) {
     res.status(404).send(err);
   }
@@ -51,14 +50,22 @@ app.delete("/tasks/delete/:id", async (req, res) => {
   }
 });
 
-app.patch("/tasks/update/:id", async (req, res) => {
+app.put("/tasks/update/:id", async (req, res) => {
   try {
-    await Task.findById(req.params.id, (err, task) => {
-      task.status = !task.status;
-      task.save();
-    });
-    res.status(200).send(result);
+    const { id: taskID } = req.params;
+    const updatedTask = new Task.findById(taskID);
+    console.log(updatedTask);
+    // updatedTask.status = !updatedTask.status;
+
+    // const task = await Task.findOneAndUpdate({ _id: taskID }, updatedTask, {
+    //   new: true,
+    //   runValidators: true,
+    // });
+    // if (!task) {
+    //   return res.status(404).json({ msg: `No task with id: ${taskID}` });
+    // }
+    // res.status(200).json({ task });
   } catch (err) {
-    res.status(404).send(err);
+    res.status(500).json({ msg: err });
   }
 });

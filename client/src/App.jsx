@@ -75,8 +75,6 @@ const App = () => {
         />
       </Sider>
       <Layout className="site-layout">
-        <Header />
-
         <Content
           style={{
             margin: "0 16px",
@@ -100,12 +98,6 @@ const App = () => {
             <TodoApp />
           </div>
         </Content>
-
-        <Footer
-          style={{
-            textAlign: "center",
-          }}
-        />
       </Layout>
     </Layout>
   );
