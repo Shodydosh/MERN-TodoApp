@@ -97,12 +97,16 @@ const TodoApp = () => {
       <div>
         <div style={{ padding: "30px" }}>
           <div
-            style={{ display: "flex", justifyContent: "space-between" }}
-            className="max-w-sm"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+            className="inputSection"
           >
             <input
               ref={inputRef}
-              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mr-4 inputField"
               value={task}
               placeholder="enter task"
               onChange={(e) => {
@@ -112,17 +116,17 @@ const TodoApp = () => {
 
             <button
               type="submit"
-              className="bg-teal-500 hover:bg-teal-700 text-white font-bold px-8 pt-6 pb-8 mb-4 rounded focus:outline-none focus:shadow-outline"
+              className="addTaskBtn"
               onClick={submitHandler}
             >
               {" "}
-              Add{" "}
+              +{" "}
             </button>
           </div>
 
           <ul>
             {tasksList.map((task, index) => (
-              <li key={index}>
+              <li className="taskItem" key={index}>
                 <div
                   key={index}
                   style={{ display: "flex", justifyContent: "space-between" }}
@@ -130,7 +134,7 @@ const TodoApp = () => {
                 >
                   <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{task}</div>
-                    <p className="text-gray-700 text-sm">task added!</p>
+                    <p className="text-gray-700 text-sm">personal</p>
                   </div>
                   <div style={{}} className="px-6 py-4">
                     <button
