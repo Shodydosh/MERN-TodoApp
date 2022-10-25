@@ -3,9 +3,10 @@ const colors = require("colors");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const morgan = require("morgan");
+const routes = require("./app/routes/TaskRoutes");
 
 //! Import TaskSchema
-const Task = require("./models/taskSchema");
+const Task = require("./app/models/taskSchema");
 
 const app = express();
 dotenv.config({ path: "./env" });
@@ -17,55 +18,57 @@ if (process.env.MODE === "development") {
 }
 const PORT = process.env.PORT || 3001;
 
-const connectDB = require("./config/db");
+//! DATABASE CONNECT
+const connectDB = require("./database/db");
 connectDB();
+
+//! ROUTES
+routes(app);
 
 //! HOSTING
 app.listen(PORT, console.log(`Server listening on ${PORT}`.brightYellow.bold));
 
-//! METHODS
+// app.get("/tasks", async (req, res) => {
+//   const tasksList = await Task.find();
+//   res.json(tasksList);
+// });
 
-app.get("/tasks", async (req, res) => {
-  const tasksList = await Task.find();
-  res.json(tasksList);
-});
+// app.post("/tasks/new", async (req, res) => {
+//   try {
+//     const task = new Task(req.body);
+//     await task.save();
+//     res.status(200).send("Task created");
+//   } catch (err) {
+//     res.status(404).send(err);
+//   }
+// });
 
-app.post("/tasks/new", async (req, res) => {
-  try {
-    const task = new Task(req.body);
-    await task.save();
-    res.status(200).send("Task created");
-  } catch (err) {
-    res.status(404).send(err);
-  }
-});
+// app.delete("/tasks/delete/:id", async (req, res) => {
+//   try {
+//     const result = await Task.findByIdAndDelete(req.params.id);
+//     // res.json(result);
+//     res.status(200).send("Task has been deleted");
+//   } catch (err) {
+//     res.status(404).send(err);
+//   }
+// });
 
-app.delete("/tasks/delete/:id", async (req, res) => {
-  try {
-    const result = await Task.findByIdAndDelete(req.params.id);
-    // res.json(result);
-    res.status(200).send(result);
-  } catch (err) {
-    res.status(404).send(err);
-  }
-});
+// app.put("/tasks/update/:id", async (req, res) => {
+//   try {
+//     const { id: taskID } = req.params;
+//     const updatedTask = new Task.findById(taskID);
+//     console.log(updatedTask);
+//     // updatedTask.status = !updatedTask.status;
 
-app.put("/tasks/update/:id", async (req, res) => {
-  try {
-    const { id: taskID } = req.params;
-    const updatedTask = new Task.findById(taskID);
-    console.log(updatedTask);
-    // updatedTask.status = !updatedTask.status;
-
-    // const task = await Task.findOneAndUpdate({ _id: taskID }, updatedTask, {
-    //   new: true,
-    //   runValidators: true,
-    // });
-    // if (!task) {
-    //   return res.status(404).json({ msg: `No task with id: ${taskID}` });
-    // }
-    // res.status(200).json({ task });
-  } catch (err) {
-    res.status(500).json({ msg: err });
-  }
-});
+//     // const task = await Task.findOneAndUpdate({ _id: taskID }, updatedTask, {
+//     //   new: true,
+//     //   runValidators: true,
+//     // });
+//     // if (!task) {
+//     //   return res.status(404).json({ msg: `No task with id: ${taskID}` });
+//     // }
+//     // res.status(200).json({ task });
+//   } catch (err) {
+//     res.status(500).json({ msg: err });
+//   }
+// });
