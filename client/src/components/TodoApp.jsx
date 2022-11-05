@@ -1,4 +1,5 @@
-import "../styles/css/TodoApp.css";
+// import "../styles/css/TodoApp.css";
+import "../styles/TodoApp.scss";
 import { useReducer, useRef } from "react";
 
 // init state
@@ -93,17 +94,11 @@ const TodoApp = () => {
   };
 
   return (
-    <div className='"grid h-screen place-items-center"'>
+    // <div id="TodoApp" className='"grid h-screen place-items-center"'>
+    <div id="TodoApp" className="">
       <div>
-        <div style={{ padding: "30px" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-            className="inputSection"
-          >
+        <div className="TodoApp-content" style={{ padding: "30px" }}>
+          <div className="inputSection">
             <input
               ref={inputRef}
               className="bg-white shadow-md rounded px-8 pt-6 pb-8 mr-4 inputField"
