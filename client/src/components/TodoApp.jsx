@@ -1,4 +1,3 @@
-// import "../styles/css/TodoApp.css";
 import "../styles/TodoApp.scss";
 import { useReducer, useRef } from "react";
 
@@ -101,7 +100,7 @@ const TodoApp = () => {
           <div className="inputSection">
             <input
               ref={inputRef}
-              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mr-4 inputField"
+              className="inputField"
               value={task}
               placeholder="enter task"
               onChange={(e) => {
@@ -119,22 +118,22 @@ const TodoApp = () => {
             </button>
           </div>
 
-          <ul>
+          <ul className="tasksList">
             {tasksList.map((task, index) => (
               <li className="taskItem" key={index}>
                 <div
                   key={index}
                   style={{ display: "flex", justifyContent: "space-between" }}
-                  className="flex rounded overflow-hidden shadow-lg"
+                  className="taskContent"
                 >
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">{task}</div>
-                    <p className="text-gray-700 text-sm">personal</p>
+                  <div className="taskTitle">
+                    <div className="titleName">{task}</div>
+                    <p className="taskType">personal</p>
                   </div>
-                  <div style={{}} className="px-6 py-4">
+                  <div style={{}} className="taskDeleteBtn">
                     <button
                       onClick={() => dispatch(removeTask(index))}
-                      className="bg-red-700 hover:bg-red-800 text-white font-bold px-8 pt-6 pb-8 mb-4 rounded focus:outline-none focus:shadow-outline"
+                      className="deleteBtn"
                     >
                       Delete
                     </button>
