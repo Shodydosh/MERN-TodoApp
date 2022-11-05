@@ -714,6 +714,7 @@
     "safe-regex-test": "^1.0.0",
     "safer-buffer": "^2.1.2",
     "sanitize.css": "^13.0.0",
+    "sass": "^1.56.0",
     "sass-loader": "^12.6.0",
     "sax": "^1.2.4",
     "saxes": "^5.0.1",
