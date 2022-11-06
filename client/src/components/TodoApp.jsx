@@ -1,4 +1,5 @@
 import "../styles/TodoApp.scss";
+import "../styles/tasks/defaultTask.scss";
 import { useReducer, useRef } from "react";
 
 // init state
@@ -120,6 +121,7 @@ const TodoApp = () => {
 
           <ul className="tasksList">
             {tasksList.map((task, index) => (
+<<<<<<< Updated upstream
               <li className="taskItem" key={index}>
                 <div
                   key={index}
@@ -134,6 +136,18 @@ const TodoApp = () => {
                     <button
                       onClick={() => dispatch(removeTask(index))}
                       className="deleteBtn"
+=======
+              <li id="taskItem" key={index}>
+                <div key={index} className="taskContent">
+                  <div className="taskTitle">
+                    <div className="titleText">{task}</div>
+                    <p className="taskTypeText">personal</p>
+                  </div>
+                  <div style={{}} className="taskDeleteButton">
+                    <button
+                      onClick={() => dispatch(removeTask(index))}
+                      className="deleteTaskBtn"
+>>>>>>> Stashed changes
                     >
                       Delete
                     </button>
