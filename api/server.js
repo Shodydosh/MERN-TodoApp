@@ -28,47 +28,47 @@ routes(app);
 //! HOSTING
 app.listen(PORT, console.log(`Server listening on ${PORT}`.brightYellow.bold));
 
-// app.get("/tasks", async (req, res) => {
-//   const tasksList = await Task.find();
-//   res.json(tasksList);
-// });
+app.get("/tasks", async (req, res) => {
+  const tasksList = await Task.find();
+  res.json(tasksList);
+});
 
-// app.post("/tasks/new", async (req, res) => {
-//   try {
-//     const task = new Task(req.body);
-//     await task.save();
-//     res.status(200).send("Task created");
-//   } catch (err) {
-//     res.status(404).send(err);
-//   }
-// });
+app.post("/tasks/new", async (req, res) => {
+  try {
+    const task = new Task(req.body);
+    await task.save();
+    res.status(200).send("Task created");
+  } catch (err) {
+    res.status(404).send(err);
+  }
+});
 
-// app.delete("/tasks/delete/:id", async (req, res) => {
-//   try {
-//     const result = await Task.findByIdAndDelete(req.params.id);
-//     // res.json(result);
-//     res.status(200).send("Task has been deleted");
-//   } catch (err) {
-//     res.status(404).send(err);
-//   }
-// });
+app.delete("/tasks/delete/:id", async (req, res) => {
+  try {
+    const result = await Task.findByIdAndDelete(req.params.id);
+    // res.json(result);
+    res.status(200).send("Task has been deleted");
+  } catch (err) {
+    res.status(404).send(err);
+  }
+});
 
-// app.put("/tasks/update/:id", async (req, res) => {
-//   try {
-//     const { id: taskID } = req.params;
-//     const updatedTask = new Task.findById(taskID);
-//     console.log(updatedTask);
-//     // updatedTask.status = !updatedTask.status;
+app.put("/tasks/update/:id", async (req, res) => {
+  try {
+    const { id: taskID } = req.params;
+    const updatedTask = new Task.findById(taskID);
+    console.log(updatedTask);
+    updatedTask.status = !updatedTask.status;
 
-//     // const task = await Task.findOneAndUpdate({ _id: taskID }, updatedTask, {
-//     //   new: true,
-//     //   runValidators: true,
-//     // });
-//     // if (!task) {
-//     //   return res.status(404).json({ msg: `No task with id: ${taskID}` });
-//     // }
-//     // res.status(200).json({ task });
-//   } catch (err) {
-//     res.status(500).json({ msg: err });
-//   }
-// });
+    const task = await Task.findOneAndUpdate({ _id: taskID }, updatedTask, {
+      new: true,
+      runValidators: true,
+    });
+    if (!task) {
+      return res.status(404).json({ msg: `No task with id: ${taskID}` });
+    }
+    res.status(200).json({ task });
+  } catch (err) {
+    res.status(500).json({ msg: err });
+  }
+});
