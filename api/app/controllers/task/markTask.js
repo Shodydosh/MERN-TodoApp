@@ -1,21 +1,32 @@
 const Task = require("../../models/taskSchema");
 
-// To Delete a Task
-exports.deleteTask = (req, res, next) => {
+// To Mark todo Complete
+exports.markTask = (req, res, next) => {
   // Log This Request
   console.log(new Date().toISOString(), req.method, req.baseUrl);
 
-  // Get Task Id to delete
+  // Get Task Id to modify
   const taskID = req.params.taskID;
 
   // Execute Update
-  Task.findOneAndDelete({
-    _id: taskID,
-  })
-    .then((deleteTask) => {
+  Task.findOneAndUpdate(
+    {
+      _id: taskID,
+    },
+    {
+      isCompleted: true,
+      "timestamps.modifiedOn": Date.now(),
+      "timestamps.completedOn": Date.now(),
+    },
+    {
+      new: true,
+    }
+  )
+    .then((updatedTodo) => {
       res.status(201).json({
         status: "Success",
-        message: "Task Deleted Successfully!",
+        message: "Task Marked as Completed!",
+        todo: updatedTodo,
       });
     })
     .catch((error) => {

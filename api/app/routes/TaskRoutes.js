@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function (app) {
-  var getTask = require("../controllers/task/getTask");
+  var getTask = require("../controllers/task/getSingleTask");
   var addTask = require("../controllers/task/addTask");
   var updateTask = require("../controllers/task/updateTask");
   var deleteTask = require("../controllers/task/deleteTask");

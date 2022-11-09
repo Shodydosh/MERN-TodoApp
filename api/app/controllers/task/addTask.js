@@ -1,13 +1,32 @@
 const Task = require("../../models/taskSchema");
 
-const express = require("express");
+// To Create a Task
+exports.addTask = (req, res, next) => {
+  // Log This Request
+  console.log(new Date().toISOString(), req.method, req.baseUrl);
 
-export default async function addTask(req, res) {
-  try {
-    const task = new Task(req.body);
-    await task.save();
-    res.status(200).send("New task has been created");
-  } catch (err) {
-    res.status(404).send(err);
-  }
-}
+  // Create a new task object
+  // req.body should strictly follow Task Model
+  const task = new Task(req.body);
+
+  // Save the object as document in MongoDb
+  task
+    .save()
+    .then((createdTask) => {
+      res.status(201).json({
+        status: "Success",
+        message: "Task Created SuccessFully!",
+        task: {
+          ...createdTask._doc,
+          taskID: createdTask._id,
+        },
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        status: "Error",
+        message: "Error in DB Operation!",
+        error: error,
+      });
+    });
+};

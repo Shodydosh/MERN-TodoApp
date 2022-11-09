@@ -1,23 +1,41 @@
 const Task = require("../../models/taskSchema");
 
-const express = require("express");
+// To Update a Task
+exports.updateTask = (req, res, next) => {
+  // Log This Request
+  console.log(new Date().toISOString(), req.method, req.baseUrl);
 
-export default async function getAllTasks(req, res) {
-  try {
-    const { id: taskID } = req.params;
-    const task = await Task.findOneAndUpdate({ id: taskID }, req.body, {
+  // Get Task Id to modify
+  const taskID = req.params.taskID;
+
+  // Get Data to be modified
+  const data = req.body;
+
+  // Execute Update
+  Task.findOneAndUpdate(
+    {
+      _id: taskID,
+    },
+    {
+      ...data,
+      "timestamps.modifiedOn": Date.now(),
+    },
+    {
       new: true,
-      runValidators: true,
-    });
-
-    // nếu không tồn tại task với id là req.params.id
-    if (!task) {
-      return res.status(404).send("No tasks found with id " + taskID);
     }
-
-    // nếu updated thành công
-    res.status(200).send("Task with id " + task + " has been updated");
-  } catch (err) {
-    res.status(500).send(err);
-  }
-}
+  )
+    .then((updatedTask) => {
+      res.status(201).json({
+        status: "Success",
+        message: "Task Updated Successfully!",
+        task: updatedTask,
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        status: "Error",
+        message: "Error in DB Operation!",
+        error: error,
+      });
+    });
+};

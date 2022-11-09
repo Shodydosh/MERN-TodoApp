@@ -1,13 +1,28 @@
 "use strict";
 
-module.exports = function (app) {
-  var getTask = require("./task/getTask");
-  var addTask = require("./task/addTask");
-  var updateTask = require("./task/updateTask");
-  var deleteTask = require("./task/deleteTask");
+const express = require("express");
 
-  app.route("/task").get(getTask);
-  app.route("/tasks/add").post(addTask);
-  app.route("/tasks/update/:id").patch(updateTask);
-  app.route("/tasks/delete/:id").delete(deleteTask);
-};
+const addTask = require("./task/addTask");
+const getAllTask = require("./task/getAllTask");
+const getSingleTask = require("./task/getSingleTask");
+const markTask = require("./task/markTask");
+const updateTask = require("./task/updateTask");
+const deleteTask = require("./task/deleteTask");
+
+const router = express.Router();
+
+//! POST METHOD
+router.post("/", addTask);
+
+//! GET METHOD
+router.get("/", getAllTask);
+router.get("/:taskID", getSingleTask);
+
+//! PUT METHOD
+router.put("/:taskID", updateTask);
+
+//! PATCH METHOD
+router.patch("/:taskID", markTask);
+
+//! DELETE METHOD
+router.delete("/:taskID", deleteTask);
