@@ -1,13 +1,64 @@
-"use strict";
+const express = require("express");
+const {
+  addTask,
+  getAllTasks,
+  getSingleTask,
+  updateTask,
+  markTask,
+  deleteTask,
+} = require("../controllers/TaskController");
 
-module.exports = function (app) {
-  var getTask = require("../controllers/task/getSingleTask");
-  var addTask = require("../controllers/task/addTask");
-  var updateTask = require("../controllers/task/updateTask");
-  var deleteTask = require("../controllers/task/deleteTask");
+const router = express.Router();
 
-  app.route("/task").get(getTask);
-  app.route("/tasks/add").post(addTask);
-  app.route("/tasks/update/:id").patch(updateTask);
-  app.route("/tasks/delete/:id").delete(deleteTask);
-};
+//! POST METHOD
+router.route("/").post(addTask);
+
+//! GET METHOD
+router.get("/", getAllTasks);
+router.get("/:taskID", getSingleTask);
+
+//! PUT METHOD
+router.put("/:taskID", updateTask);
+
+//! PATCH METHOD
+router.patch("/:taskID", markTask);
+
+//! DELETE METHOD
+router.delete("/:taskID", deleteTask);
+
+// export the task routes
+module.export = router;
+
+// "use strict";
+
+// const express = require("express");
+
+// const {
+//   addTask,
+//   getAllTask,
+//   getSingleTask,
+//   updateTask,
+//   markTask,
+//   deleteTask,
+// } = require("../controllers/TaskController");
+
+// const router = express.Router();
+
+// //! POST METHOD
+// router.post("/", addTask);
+
+// //! GET METHOD
+// router.get("/", getAllTask);
+// router.get("/:taskID", getSingleTask);
+
+// //! PUT METHOD
+// router.put("/:taskID", updateTask);
+
+// //! PATCH METHOD
+// router.patch("/:taskID", markTask);
+
+// //! DELETE METHOD
+// router.delete("/:taskID", deleteTask);
+
+// // export the task routes
+// module.export = router;

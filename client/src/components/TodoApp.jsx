@@ -121,7 +121,7 @@ const TodoApp = () => {
 
           <ul className="tasksList">
             {tasksList.map((task, index) => (
-              <li className="taskItem" key={index}>
+              <li id="taskItem" key={index}>
                 <div
                   key={index}
                   style={{ display: "flex", justifyContent: "space-between" }}

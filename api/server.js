@@ -19,6 +19,10 @@ const normalizePort = (val) => {
   return false;
 };
 
+// Set the PORT
+const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
+
 // Setting up callbacks
 // incase errors are encountered
 const onError = (error) => {
@@ -30,11 +34,9 @@ const onError = (error) => {
     case "EACCES":
       console.error(`${bind} requires elevated privileges`.bgRed);
       process.exit(1);
-      break;
     case "EADDRINUSE":
       console.error(`${bind} is already in use`.bgRed);
       process.exit(1);
-      break;
     default:
       throw error;
   }
@@ -50,10 +52,6 @@ const PORT = app.get("port");
 const onServerStart = () => {
   console.log(`TODO Api server is running on PORT: ${PORT}`.brightYellow.bold);
 };
-
-// Set the PORT
-const port = normalizePort(process.env.PORT || "3000");
-app.set("port", port);
 
 // Start the Server
 const server = http.createServer(app);
