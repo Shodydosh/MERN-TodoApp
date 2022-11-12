@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
+    // var connectString = process.env.MONGO_URI;
+    var connectString = "mongodb://localhost:27017/MERN-TodoApp";
+
+    const conn = await mongoose.connect(connectString, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });

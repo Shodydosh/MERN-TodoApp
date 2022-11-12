@@ -1,6 +1,5 @@
 
 #taskItem {
-    // background-color: red;
     margin-bottom: 20px;
     .taskContent {
         display: flex;
@@ -13,23 +12,23 @@
         
         .taskTitle {
             padding: 1.5rem 2rem 2rem 2rem;
-            .titleText {
+            .titleName {
                 font-weight: 700;
                 font-size: 1.75rem/* 14px */;
                 line-height: 1.5rem/* 20px */;   
                 margin-bottom: 1rem/* 8px */
             }
-
-            .taskTypeText {
+            
+            .taskType {
                 margin-bottom: 0.5rem/* 8px */;         
                 color: rgb(55 65 81);
                 opacity: 0.5;
             }
         }
         
-        .taskDeleteButton {
+        .taskDeleteBtn {
             padding: 1rem 1.5rem 1rem 1.5rem;
-            .deleteTaskBtn {
+            .deleteBtn {
                 background-color: rgb(185 28 28);
                 color: rgb(255 255 255);
                 font-weight: 700;
@@ -37,7 +36,7 @@
                 margin-bottom: 1rem;
                 border-radius: 0.25rem;
             }
-            .deleteTaskBtn:hover {
+            .deleteBtn:hover {
                 background-color: rgb(153 27 27);
             }
             
